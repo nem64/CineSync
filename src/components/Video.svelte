@@ -7,8 +7,9 @@
     import qualitySelector from '@silvermine/videojs-quality-selector';
     import "videojs-hotkeys";
 
-    export let data;
-    let video;
+    let { data } = $props()
+
+    let video = $state()
     qualitySelector(videojs);
     onMount(async () => {
         if (videojs.getPlayers()['player']) {

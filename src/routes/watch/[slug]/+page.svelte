@@ -2,9 +2,11 @@
     import { videoInfo, fetchSeries } from '$lib/cinemana.js';
     import SeasonView from '$components/SeasonView.svelte';
     import Video from '$components/Video.svelte';
-    export let data;
-    let info = videoInfo(data.videoId);
-    let series = fetchSeries(data.videoId);
+    let { data } = $props()
+
+    let info = $state(videoInfo(data.videoId));
+    let series = $state(fetchSeries(data.videoId));
+    
     function handleVideoChange(event) {
         info = videoInfo(event.detail.videoId);
     }

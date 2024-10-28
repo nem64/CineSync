@@ -2,12 +2,11 @@
     import { pushState } from '$app/navigation';
     import { createEventDispatcher, onMount } from 'svelte';
 
-    export let seasons;
-    export let currentEpisode;
-    let episodes = [];
+    let { seasons, currentEpisode } = $props();
+    let episodes = $state([]);
 
-    let currentTab;
-    async function updateEpisodeList(season) {
+    let currentTab = $state();
+    function updateEpisodeList(season) {
         episodes = seasons[season];
         currentTab = season;
     }
@@ -30,11 +29,11 @@
     }
 </script>
 
-<div role="tablist" class="tabs tabs-boxed mb-8 tabs-sm lg:tabs-md">
+<div role="tablist" class="tabs tabs-boxed mb-8 tabs-sm lg:tabs-md border border-slate-600 shadow-xl">
     {#each Object.entries(seasons) as [season, _]}
         <button
             class:active={currentTab == season}
-            on:click={updateEpisodeList(season)}
+            onclick={() => updateEpisodeList(season)}
             role="tab"
             class="tab {currentTab == season ? 'tab-active' : ''}"
             >Season {season}</button
@@ -46,11 +45,11 @@
     {#each episodes as episode}
         <button
             class:active={currentEpisode == episode.id}
-            on:click={changeVideo(episode.id)}
-            class="btn lg:col-span-1 col-span-2 btn-block {currentEpisode ==
+            onclick={() => changeVideo(episode.id)}
+            class="btn col-span-2 btn-block {currentEpisode ==
             episode.id
                 ? 'btn-active'
-                : ''}">Episode {episode.episode}</button
+                : ''} border border-slate-700 shadow-md">Episode {episode.episode}</button
         >
     {/each}
 </div>

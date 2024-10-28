@@ -1,8 +1,8 @@
 <script>
     import { search } from "$lib/cinemana.js";
     import VideoCard from '$components/VideoCard.svelte';
-    let entry = null;
-    let videos = [];
+    let entry = $state(null);
+    let videos = $state([]);
 
     async function populateVideos(event) {
         if(event.key === 'Enter') {
@@ -16,7 +16,7 @@
     type="text"
     placeholder="Search movie/series"
     bind:value={entry}
-    on:keydown={populateVideos}
+    onkeydown={populateVideos}
     class="input input-bordered w-full"
 />
 

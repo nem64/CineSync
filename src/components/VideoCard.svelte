@@ -1,8 +1,8 @@
 <script>
-    export let info;
+    let { info } = $props()
 </script>
 
-<div class="card image-full shadow-xl">
+<div class="card image-full shadow-xl border border-slate-700 shadow-xl">
     <figure>
         <img src={info.imageUrl} alt={info.title} />
     </figure>
